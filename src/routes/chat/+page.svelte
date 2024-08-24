@@ -17,6 +17,11 @@
 
 	let messages: Message[] = [];
 
+	addMessage({
+		from: 'ai',
+		text: '#greeting'
+	});
+
 	function addMessage(message: Omit<Message, 'time'>) {
 		messages = [
 			...messages,
@@ -53,8 +58,6 @@
 	const handleSendUserMessage: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
 		e.preventDefault();
 
-		if (!userMessage) return;
-
 		addMessage({
 			from: 'user',
 			text: userMessage
@@ -62,10 +65,31 @@
 
 		userMessage = '';
 
+		await stall(1000);
+
+		addMessage({
+			from: 'ai',
+			text: 'Desculpe, estou com dificuldades em entender no momento.'
+		});
+
+		await stall(1000);
+
+		addMessage({
+			from: 'ai',
+			text: '#show-options'
+		});
+	};
+
+	async function sendSalesReport() {
+		addMessage({
+			from: 'user',
+			text: 'Relatório de vendas da última semana.'
+		});
+
 		const responses: Omit<Message, 'time'>[] = [
 			{
 				from: 'ai',
-				text: 'Ok, estou preparando os dados.\nPor favor, aguarde um momento.'
+				text: 'Ok, estou preparando os dados do seu relatório de vendas.\nPor favor, aguarde um momento.'
 			},
 			{
 				from: 'ai',
@@ -86,17 +110,17 @@
 
 			addMessage(element);
 		}
-	};
+	}
 </script>
 
 <svelte:head>
-	<title>Stone Xperience - Chat</title>
+	<title>Stone Xperience - Chat Inteligente</title>
 </svelte:head>
 
 <div class="sm:ml-64">
 	<div class="mt-14">
 		<div class="flex justify-center sm:hidden bg-base-200 p-2">
-			<span class="text-2xl font-bold"> Stone AI </span>
+			<span class="text-2xl font-bold"> Chat inteligente </span>
 		</div>
 
 		<div class="flex flex-col gap-4 p-4" use:scrollToBottom={{ list: messages }}>
@@ -104,12 +128,36 @@
 				<div animate:flip transition:fade>
 					{#if from === 'ai'}
 						<ChatItem position="left" icon={IconRobotExcited} from="Stone AI" {time}>
-							{#if text === '#send-email'}
+							{#if text === '#greeting'}
+								<span> Olá! Como posso te ajudar hoje? </span>
+								<br />
+								<span>Escolha uma das opções abaixo.</span>
+
+								<div class="mt-2 flex flex-col gap-1">
+									<button on:click={sendSalesReport} class="link text-start">
+										Relatório de vendas da última semana.
+									</button>
+
+									<button class="link text-start"> Situação atual do estoque. </button>
+								</div>
+							{:else if text === '#show-options'}
+								<span>Escolha uma das opções abaixo.</span>
+
+								<div class="mt-2 flex flex-col gap-1">
+									<button on:click={sendSalesReport} class="link text-start">
+										Relatório de vendas da última semana.
+									</button>
+
+									<button class="link text-start"> Situação atual do estoque. </button>
+								</div>
+							{:else if text === '#send-email'}
 								<span> Deseja receber o relatório por email? </span>
 
-								<button on:click={handleSendEmail} class="mt-2 btn btn-outline btn-primary w-full">
-									Sim, envie no meu email.
-								</button>
+								<div class="mt-2 flex flex-col gap-1">
+									<button on:click={handleSendEmail} class="link text-start">
+										Sim, envie no meu email.
+									</button>
+								</div>
 							{:else}
 								{text}
 							{/if}

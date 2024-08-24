@@ -4,7 +4,9 @@
 	import '../app.postcss';
 </script>
 
-<Navbar />
-<Sidebar />
+<div>
+	<Navbar />
+	<Sidebar />
 
-<slot />
+	<slot />
+</div>

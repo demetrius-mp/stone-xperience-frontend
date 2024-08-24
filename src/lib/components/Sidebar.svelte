@@ -55,18 +55,18 @@
 
 <aside
 	class={classnames(
-		'fixed top-0 left-0 z-40 w-64 h-screen pt-[4.25rem] transition-transform sm:translate-x-0 border-r bg-base-200 border-gray-700',
+		'fixed top-0 left-0 z-40 w-64 h-screen pt-[4.25rem] transition-transform sm:translate-x-0 border-r bg-base-100 border-gray-300',
 		$sidebarIsOpen && 'transform-none',
 		!$sidebarIsOpen && '-translate-x-full'
 	)}
 >
-	<div class="h-full px-2 pb-4 overflow-y-auto bg-base-200">
+	<div class="h-full px-2 pb-4 overflow-y-auto bg-base-100">
 		<ul class="space-y-2 font-medium">
 			{#each items as { name, icon, href }}
 				<li>
 					<a
 						{href}
-						class="btn btn-ghost w-full justify-start text-white"
+						class="btn btn-ghost w-full justify-start hover:bg-primary/50"
 						class:active={checkSidebarItemIsActive(href)}
 					>
 						<svelte:component this={icon} class="w-5 h-5 " />
@@ -82,6 +82,6 @@
 
 <style lang="postcss">
 	.active {
-		@apply bg-base-content/10;
+		@apply !bg-primary/90;
 	}
 </style>

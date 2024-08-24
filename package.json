@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"chart.js": "^4.4.4",
 		"daisyui": "^4.12.10"
 	}
 }

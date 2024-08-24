@@ -11,7 +11,7 @@
 </script>
 
 <nav
-	class="fixed top-0 z-50 w-full border-b bg-base-200 dark:border-gray-700"
+	class="fixed top-0 z-50 w-full border-b bg-base-100 border-gray-300"
 	style="padding-right: var(--scrollbar-width, 0px);"
 >
 	<div class="px-3 py-3">
@@ -26,9 +26,10 @@
 				</button>
 				<a
 					href="/"
-					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap btn-sm"
+					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap btn-sm font-bold"
+					style="color: #00a868;"
 				>
-					Stone Xperience
+					stone Xperience
 				</a>
 			</div>
 			<div class="ms-3">

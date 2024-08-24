@@ -7,6 +7,7 @@
 	export let position: 'left' | 'right';
 
 	$: positionClass = position === 'left' ? 'chat-start' : 'chat-end';
+	$: marginClass = position === 'left' ? 'ms-2' : 'me-2';
 </script>
 
 <div class="chat {positionClass} py-0">
@@ -15,7 +16,7 @@
 			<svelte:component this={icon} class="text-2xl" />
 		</div>
 	</div>
-	<div class="chat-header mb-1 ms-2">
+	<div class="chat-header mb-1 {marginClass}">
 		{from}
 
 		<time class="text-xs opacity-50">
