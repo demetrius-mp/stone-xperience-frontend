@@ -1,0 +1,87 @@
+<script lang="ts" context="module">
+	import { writable } from 'svelte/store';
+
+	export const sidebarIsOpen = writable(false);
+</script>
+
+<script lang="ts">
+	import { page } from '$app/stores';
+	import { classnames } from '$lib/utils/classnames';
+	import type { ComponentType } from 'svelte';
+	import IconCashRegister from '~icons/mdi/CashRegister';
+	import IconChartLine from '~icons/mdi/ChartLine';
+	import IconChat from '~icons/mdi/Chat';
+	import IconStore from '~icons/mdi/Store';
+
+	type SidebarItem = {
+		name: string;
+		icon: ComponentType;
+		href: string;
+	};
+
+	const items: SidebarItem[] = [
+		{
+			name: 'Dashboard',
+			icon: IconChartLine,
+			href: '/dashboard'
+		},
+		{
+			name: 'Chat inteligente',
+			icon: IconChat,
+			href: '/chat'
+		},
+		{
+			name: 'Estoque',
+			icon: IconStore,
+			href: '/store'
+		},
+		{
+			name: 'Caixa',
+			icon: IconCashRegister,
+			href: '/cash-register'
+		}
+	];
+
+	$: checkSidebarItemIsActive = (href: string) => {
+		return $page.route.id?.startsWith(href);
+	};
+</script>
+
+{#if $sidebarIsOpen}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div on:click={() => ($sidebarIsOpen = false)} class="bg-black/30 fixed inset-0 z-30"></div>
+{/if}
+
+<aside
+	class={classnames(
+		'fixed top-0 left-0 z-40 w-64 h-screen pt-[4.25rem] transition-transform sm:translate-x-0 border-r bg-base-200 border-gray-700',
+		$sidebarIsOpen && 'transform-none',
+		!$sidebarIsOpen && '-translate-x-full'
+	)}
+>
+	<div class="h-full px-2 pb-4 overflow-y-auto bg-base-200">
+		<ul class="space-y-2 font-medium">
+			{#each items as { name, icon, href }}
+				<li>
+					<a
+						{href}
+						class="btn btn-ghost w-full justify-start text-white"
+						class:active={checkSidebarItemIsActive(href)}
+					>
+						<svelte:component this={icon} class="w-5 h-5 " />
+						<span>
+							{name}
+						</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+</aside>
+
+<style lang="postcss">
+	.active {
+		@apply bg-base-content/10;
+	}
+</style>
