@@ -134,6 +134,8 @@
 								<span>Escolha uma das opções abaixo.</span>
 
 								<div class="mt-2 flex flex-col gap-1">
+									<button class="link text-start"> Resuma os dados do dashboard. </button>
+
 									<button on:click={sendSalesReport} class="link text-start">
 										Relatório de vendas da última semana.
 									</button>

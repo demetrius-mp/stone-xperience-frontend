@@ -26,8 +26,7 @@
 				</button>
 				<a
 					href="/"
-					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap btn-sm font-bold"
-					style="color: #00a868;"
+					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap btn-sm font-bold strong-green"
 				>
 					stone Xperience
 				</a>
