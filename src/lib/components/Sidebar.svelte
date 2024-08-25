@@ -28,7 +28,7 @@
 		{
 			name: 'Estoque',
 			icon: IconStore,
-			href: '/store'
+			href: '/supplies'
 		},
 		{
 			name: 'Fluxo de caixa',
