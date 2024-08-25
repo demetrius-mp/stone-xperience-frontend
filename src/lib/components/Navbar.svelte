@@ -60,13 +60,14 @@
 							class="z-[60] flex w-48 flex-col gap-1 rounded-box bg-primary p-2"
 							transition:slide={{ duration: 100 }}
 						>
-							<button
+							<a
+								href="/profile"
 								class="flex w-full items-center gap-2 rounded-lg p-2 data-[highlighted]:bg-base-content/5"
 								use:melt={item}
 							>
 								<IconAccountCog />
 								Minha conta
-							</button>
+							</a>
 
 							<button
 								class="flex w-full items-center gap-2 rounded-lg p-2 data-[highlighted]:bg-base-content/5"
