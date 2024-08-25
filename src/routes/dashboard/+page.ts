@@ -31,9 +31,10 @@ const textCenter: Plugin = {
 
 		ctx.restore();
 		const fontSize = width / 100;
-		ctx.font = fontSize + 'em sans-serif';
+		console.log(fontSize);
+		ctx.font = 3 + 'em sans-serif';
 		ctx.textBaseline = 'middle';
-		ctx.fillStyle = colors[0];
+		ctx.fillStyle = '#fff';
 
 		const text = ((faturamentoAtual / meta) * 100).toFixed(1) + '%',
 			textX = Math.round((width - ctx.measureText(text).width) / 2),
@@ -60,13 +61,18 @@ const doughnutConfig: ChartConfiguration = {
 	},
 	options: {
 		// @ts-expect-error - This is a custom label
-		cutout: '75%',
+		cutout: '70%',
+		aspectRatio: 1.1,
 		plugins: {
 			title: {
 				display: true,
-				text: `Meta de Faturamento Anual: ${meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`,
+				text: 'Meta de faturamento',
 				font: {
 					size: 20
+				},
+				padding: {
+					bottom: 30,
+					top: 10
 				}
 			},
 			legend: {
@@ -149,13 +155,11 @@ const lineConfig: ChartConfiguration = {
 };
 
 const pieData = {
-	'Pão Francês': 80,
-	Café: 50,
-	Salgado: 40,
-	'Coca-cola': 25,
-	Leite: 20,
-	Sonho: 10,
-	Outros: 8
+	'Pão Francês': 20,
+	Café: 30,
+	Salgado: 27,
+	'Coca-cola': 17,
+	Outros: 20
 };
 
 const pieConfig: ChartConfiguration = {
@@ -165,15 +169,7 @@ const pieConfig: ChartConfiguration = {
 		datasets: [
 			{
 				data: Object.values(pieData),
-				backgroundColor: [
-					colors[0],
-					colors[1],
-					colors[2],
-					colors[3],
-					colors[4],
-					colors[5],
-					colors[6]
-				],
+				backgroundColor: [colors[0], colors[1], colors[2], colors[3], colors[6]],
 				hoverOffset: 4,
 				borderWidth: 1
 			}
@@ -181,15 +177,45 @@ const pieConfig: ChartConfiguration = {
 	},
 	options: {
 		plugins: {
+			datalabels: {
+				color: 'white',
+				font: {
+					size: 18
+				},
+				// See https://chartjs-plugin-datalabels.netlify.app/guide/options.html#option-context
+				formatter: (value, ctx) => {
+					let sum = 0;
+					const dataArr = ctx.chart.data.datasets[0].data;
+
+					dataArr.map((data) => {
+						// @ts-expect-error - data is a number
+						sum += data;
+					});
+
+					const percentage = ((value * 100) / sum).toFixed(2) + '%';
+					return percentage;
+				}
+			},
 			title: {
 				display: true,
 				text: 'Produtos mais vendidos',
 				font: {
 					size: 20
+				},
+				padding: {
+					top: 10,
+					bottom: 30
 				}
 			},
 			legend: {
-				display: true
+				display: true,
+				position: 'bottom',
+				title: {
+					display: true,
+					padding: {
+						top: 25
+					}
+				}
 			}
 		}
 	}

@@ -2,6 +2,10 @@
 	import Chart from '$lib/components/Chart.svelte';
 
 	export let data;
+
+	function formatCurrency(value: number) {
+		return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+	}
 </script>
 
 <svelte:head>
@@ -15,6 +19,16 @@
 		<div class="flex flex-col gap-4 xl:grid xl:grid-cols-3">
 			<div class="p-4 bg-dashboard-chart rounded-xl col-span-1">
 				<Chart config={data.datasets.metaDeFaturamento} />
+
+				<div class="text-white flex flex-col mt-8 ms-4 mb-2 text-lg">
+					<span>
+						Faturamento total: <strong>{formatCurrency(39500)}</strong>
+					</span>
+
+					<span>
+						Meta: <strong>{formatCurrency(50000)}</strong>
+					</span>
+				</div>
 			</div>
 
 			<div class="p-4 bg-dashboard-chart rounded-xl col-span-2">
