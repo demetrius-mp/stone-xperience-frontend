@@ -61,14 +61,46 @@
 		<div class="flex flex-col gap-2">
 			<h4 class="text-2xl font-bold strong-green">Jornada Stone</h4>
 
-			<div class="flex gap-4">
-				<div class="bg-dashboard-chart h-48 w-48 rounded-3xl"></div>
+			<div class="flex gap-4 text-white">
+				<div class="bg-dashboard-chart w-48 rounded-3xl p-4 flex flex-col gap-2">
+					<div class="flex items-center justify-center">
+						<img src="/stone-book.png" class="h-36" alt="Livro da Stone" />
+					</div>
 
-				<div class="bg-dashboard-chart h-48 w-48 rounded-3xl"></div>
+					<strong> Livro </strong>
 
-				<div class="bg-dashboard-chart h-48 w-48 rounded-3xl"></div>
+					<p class="text-justify">5 segundos - O jeito Stone de servir o cliente</p>
+				</div>
 
-				<div class="bg-dashboard-chart h-48 w-48 rounded-3xl"></div>
+				<div class="bg-dashboard-chart w-48 rounded-3xl p-4 flex flex-col gap-2">
+					<div class="flex items-center justify-center">
+						<img src="/stone-book.png" class="h-36" alt="Livro da Stone" />
+					</div>
+
+					<strong> Livro </strong>
+
+					<p class="text-justify">5 segundos - O jeito Stone de servir o cliente</p>
+				</div>
+
+				<div class="bg-dashboard-chart w-48 rounded-3xl p-4 flex flex-col gap-2">
+					<div class="flex items-center justify-center">
+						<img src="/stone-book.png" class="h-36" alt="Livro da Stone" />
+					</div>
+
+					<strong> Livro </strong>
+
+					<p class="text-justify">5 segundos - O jeito Stone de servir o cliente</p>
+				</div>
+
+				<div class="bg-dashboard-chart w-48 rounded-3xl p-4 flex flex-col gap-2">
+					<div class="flex items-center justify-center">
+						<img src="/stone-book.png" class="h-36" alt="Livro da Stone" />
+					</div>
+
+					<strong> Livro </strong>
+
+					<p class="text-justify">5 segundos - O jeito Stone de servir o cliente</p>
+				</div>
 			</div>
 		</div>
 	</div>
