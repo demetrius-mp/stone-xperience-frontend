@@ -11,6 +11,7 @@
 	import IconCashRegister from '~icons/mdi/CashRegister';
 	import IconChartLine from '~icons/mdi/ChartLine';
 	import IconChat from '~icons/mdi/Chat';
+	import IconPeopleGroup from '~icons/mdi/PeopleGroup';
 	import IconStore from '~icons/mdi/Store';
 
 	type SidebarItem = {
@@ -34,6 +35,11 @@
 			name: 'Fluxo de caixa',
 			icon: IconCashRegister,
 			href: '/cash-flow'
+		},
+		{
+			name: 'Clientes',
+			icon: IconPeopleGroup,
+			href: '/customers'
 		},
 		{
 			name: 'Pergunte ao Tony',
