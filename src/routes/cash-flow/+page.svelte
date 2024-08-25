@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>Stone Xperience - Fluxo de Caixa</title>
+	<title>StoneXperience - Fluxo de Caixa</title>
 </svelte:head>
 
 <div class=" sm:ml-64">

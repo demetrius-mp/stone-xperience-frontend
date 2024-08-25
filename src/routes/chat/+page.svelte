@@ -157,7 +157,7 @@
 </script>
 
 <svelte:head>
-	<title>Stone Xperience - Chat Inteligente</title>
+	<title>StoneXperience - Chat Inteligente</title>
 </svelte:head>
 
 <div class="sm:ml-64">

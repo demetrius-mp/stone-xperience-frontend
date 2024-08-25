@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Stone Xperience - Clientes</title>
+	<title>StoneXperience - Clientes</title>
 </svelte:head>
 
 <div class=" sm:ml-64">
