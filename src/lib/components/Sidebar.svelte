@@ -33,7 +33,7 @@
 		{
 			name: 'Fluxo de caixa',
 			icon: IconCashRegister,
-			href: '/cash-register'
+			href: '/cash-flow'
 		},
 		{
 			name: 'Pergunte ao Tony',
