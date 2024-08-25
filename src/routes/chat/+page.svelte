@@ -35,21 +35,26 @@
 	async function handleSendEmail() {
 		addMessage({
 			from: 'user',
-			text: 'Sim, envie no meu email.'
+			text: 'E-mail'
 		});
 
 		await stall(300);
 
 		addMessage({
 			from: 'ai',
-			text: 'Enviando no seu email. Por favor, aguarde um momento.'
+			text: 'Enviando no seu e-mail. Por favor, aguarde um momento.'
 		});
 
 		await stall(1500);
 
 		addMessage({
 			from: 'ai',
-			text: 'Email enviado com sucesso!'
+			text: 'E-mail enviado com sucesso!'
+		});
+
+		addMessage({
+			from: 'ai',
+			text: 'Ok, posso te ajudar com mais alguma coisa?'
 		});
 	}
 
@@ -58,12 +63,21 @@
 	const handleSendUserMessage: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
 		e.preventDefault();
 
-		addMessage({
-			from: 'user',
-			text: userMessage
-		});
+		if (['não', 'nao'].includes(userMessage)) {
+			addMessage({
+				from: 'user',
+				text: userMessage
+			});
 
-		userMessage = '';
+			userMessage = '';
+
+			addMessage({
+				from: 'ai',
+				text: 'Ok! Fico feliz em poder ajudar, se tiver mais perguntas ou precisar de alguma coisa é só chamar.'
+			});
+
+			return;
+		}
 
 		await stall(1000);
 
