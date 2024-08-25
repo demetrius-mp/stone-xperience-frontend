@@ -12,7 +12,7 @@
 </svelte:head>
 
 <div class=" sm:ml-64">
-	<div class="mt-[3.5rem] p-4 flex flex-col gap-4">
+	<div class="mt-[3.5rem] p-4 flex flex-col gap-6">
 		<div>
 			<h2 class="text-3xl font-extrabold text-primary strong-green">Fluxo de caixa</h2>
 		</div>
