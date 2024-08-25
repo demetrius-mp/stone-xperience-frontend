@@ -63,14 +63,22 @@
 	const handleSendUserMessage: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
 		e.preventDefault();
 
-		if (['não', 'nao'].includes(userMessage)) {
-			addMessage({
-				from: 'user',
-				text: userMessage
-			});
+		addMessage({
+			from: 'user',
+			text: userMessage
+		});
 
-			userMessage = '';
+		userMessage = '';
 
+		const lastMessage = messages.at(-1);
+
+		const isEndingConversation =
+			['não', 'nao'].includes(userMessage) &&
+			lastMessage &&
+			lastMessage.from === 'ai' &&
+			lastMessage.text === 'Ok, posso te ajudar com mais alguma coisa?';
+
+		if (isEndingConversation) {
 			addMessage({
 				from: 'ai',
 				text: 'Ok! Fico feliz em poder ajudar, se tiver mais perguntas ou precisar de alguma coisa é só chamar.'
