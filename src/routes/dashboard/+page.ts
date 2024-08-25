@@ -1,4 +1,5 @@
-import type { ChartConfiguration } from 'chart.js';
+import type { Plugin } from 'chart.js';
+import Chart, { type ChartConfiguration } from 'chart.js/auto';
 import type { PageLoad } from './$types';
 
 const colors = [
@@ -13,151 +14,242 @@ const colors = [
 	'#ffffff'
 ];
 
-const d1: ChartConfiguration = {
-	type: 'pie',
-	data: {
-		labels: ['Pão Francês', 'Café', 'Salgado', 'Coca-cola', 'Outros'],
-		datasets: [
-			{
-				label: 'Faturamento anual/item',
-				data: [80, 50, 40, 25, 8],
-				backgroundColor: [colors[0], colors[1], colors[2], colors[3], colors[6]],
-				hoverOffset: 4,
-				datalabels: {
-					color: 'white',
-					font: {
-						size: 18
-					},
-					// See https://chartjs-plugin-datalabels.netlify.app/guide/options.html#option-context
-					formatter: (value, ctx) => {
-						let sum = 0;
-						const dataArr = ctx.chart.data.datasets[0].data;
+const meta = 50000;
+const faturamentoAtual = 39500;
+const restante = meta - faturamentoAtual;
 
-						dataArr.map((data) => {
-							// @ts-expect-error - data is a number
-							sum += data;
-						});
+const textCenter: Plugin = {
+	id: 'textCenter',
+	beforeDraw: function (chart) {
+		// @ts-expect-error - This is a custom label
+		if (chart.config.type !== 'doughnut') {
+			return;
+		}
+		const width = chart.width,
+			height = chart.height,
+			ctx = chart.ctx;
 
-						const percentage = ((value * 100) / sum).toFixed(2) + '%';
-						return percentage;
-					},
-					align: 'end',
-					anchor: 'end'
-				}
-			}
-		]
-	},
-	options: {
-		plugins: {
-			legend: {
-				position: 'bottom',
-				title: {
-					display: true,
-					padding: 10
-				}
-			},
-			title: {
-				display: true,
-				text: 'Faturamento anual por item',
-				font: {
-					size: 24
-				},
-				padding: {
-					bottom: 36
-				}
-			}
-		},
-		responsive: true,
-		maintainAspectRatio: false
+		ctx.restore();
+		const fontSize = width / 100;
+		ctx.font = fontSize + 'em sans-serif';
+		ctx.textBaseline = 'middle';
+		ctx.fillStyle = colors[0];
+
+		const text = ((faturamentoAtual / meta) * 100).toFixed(1) + '%',
+			textX = Math.round((width - ctx.measureText(text).width) / 2),
+			textY = height / 2;
+
+		ctx.fillText(text, textX, textY);
+		ctx.save();
 	}
 };
 
-const d2: ChartConfiguration = {
-	type: 'line',
+Chart.register(textCenter);
+
+const doughnutConfig: ChartConfiguration = {
+	type: 'doughnut',
 	data: {
-		labels: [
-			'Janeiro',
-			'Fevereiro',
-			'Março',
-			'Abril',
-			'Maio',
-			'Junho',
-			'Julho',
-			'Agosto',
-			'Setembro',
-			'Outubro',
-			'Novembro',
-			'Dezembro'
-		],
+		labels: ['Faturamento Atual', 'Restante'],
 		datasets: [
 			{
-				label: 'My First Dataset',
-				data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 100)),
-				hoverOffset: 4
+				data: [faturamentoAtual, restante],
+				backgroundColor: [colors[5], colors[0]]
 			}
 		]
 	},
 	options: {
-		borderColor: '#61f284',
+		// cutout: '75%',
 		plugins: {
+			title: {
+				display: true,
+				text: `Meta de Faturamento Anual: ${meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+			},
 			legend: {
 				display: false
 			},
-			title: {
-				display: true,
-				text: 'Faturamento anual',
-				font: {
-					size: 24
-				},
-				padding: {
-					top: 10,
-					bottom: 20
+			tooltip: {
+				callbacks: {
+					label: function (tooltipItem) {
+						// @ts-expect-error - This is a custom label
+						const total = tooltipItem.dataset.data.reduce((acc, curr) => acc + curr, 0);
+						const currentValue = tooltipItem.dataset.data[tooltipItem.dataIndex];
+						// @ts-expect-error - This is a custom label
+						const percentage = ((currentValue / total) * 100).toFixed(2);
+
+						const label = `${(currentValue || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} (${percentage}%)`;
+						return label;
+					}
 				}
 			}
-		},
-		responsive: true,
-		maintainAspectRatio: false
+		}
 	}
 };
 
-const d3: ChartConfiguration = {
-	type: 'bar',
+const lineData = {
+	Janeiro: 2567,
+	Fevereiro: 3124,
+	Março: 4367,
+	Abril: 3567,
+	Maio: 3564,
+	Junho: 4567,
+	Julho: 5833,
+	Agosto: 3755,
+	Setembro: 5500,
+	Outubro: 6789,
+	Novembro: 4899,
+	Dezembro: 5439
+};
+
+const lineConfig: ChartConfiguration = {
+	type: 'line',
 	data: {
-		labels: Array.from({ length: 24 }, (_, i) => i),
+		labels: Object.keys(lineData),
 		datasets: [
 			{
-				label: 'Número de vendas',
-				data: Array.from({ length: 24 }, () => Math.floor(Math.random() * 100)),
+				data: Object.values(lineData),
+				backgroundColor: colors[0],
+				borderColor: colors[5]
+			}
+		]
+	},
+	options: {
+		plugins: {
+			title: {
+				display: true,
+				text: 'Faturamento por Mês'
+			},
+			legend: {
+				display: false
+			}
+		},
+		scales: {
+			x: {
+				title: {
+					display: true,
+					text: 'Mês'
+				}
+			},
+			y: {
+				title: {
+					display: true,
+					text: 'Vendas'
+				},
+				beginAtZero: true
+			}
+		}
+	}
+};
+
+const pieData = {
+	'Pão Francês': 80,
+	Café: 50,
+	Salgado: 40,
+	'Coca-cola': 25,
+	Leite: 20,
+	Sonho: 10,
+	Outros: 8
+};
+
+const pieConfig: ChartConfiguration = {
+	type: 'pie',
+	data: {
+		labels: Object.keys(pieData),
+		datasets: [
+			{
+				data: Object.values(pieData),
+				backgroundColor: [
+					colors[0],
+					colors[1],
+					colors[2],
+					colors[3],
+					colors[4],
+					colors[5],
+					colors[6]
+				],
 				hoverOffset: 4
 			}
 		]
 	},
 	options: {
-		backgroundColor: '#61f284',
-		color: '#61f284',
 		plugins: {
 			title: {
 				display: true,
-				text: 'Número de vendas por hora',
-				font: {
-					size: 24
-				},
-				padding: {
-					top: 10,
-					bottom: 20
-				}
+				text: 'Produtos mais vendidos'
+			},
+			legend: {
+				display: true
+			}
+		}
+	}
+};
+
+const salesData = {
+	'5:00': 5,
+	'6:00': 32,
+	'7:00': 45,
+	'8:00': 68,
+	'9:00': 92,
+	'10:00': 78,
+	'11:00': 68,
+	'12:00': 102,
+	'13:00': 110,
+	'14:00': 152,
+	'15:00': 176,
+	'16:00': 151,
+	'17:00': 130,
+	'18:00': 78,
+	'19:00': 23,
+	'20:00': 12,
+	'21:00': 5
+};
+
+const barConfig: ChartConfiguration = {
+	type: 'bar',
+	data: {
+		datasets: [
+			{
+				// @ts-expect-error - This is a custom label
+				data: salesData,
+				backgroundColor: colors[5],
+				borderColor: colors[0],
+				borderWidth: 2
+			}
+		]
+	},
+	options: {
+		plugins: {
+			title: {
+				display: true,
+				text: 'Vendas por horário'
+			},
+			legend: {
+				display: false
 			}
 		},
-		responsive: true,
-		maintainAspectRatio: false
+		scales: {
+			y: {
+				title: {
+					display: true,
+					text: 'Vendas'
+				},
+				beginAtZero: true
+			},
+			x: {
+				title: {
+					display: true,
+					text: 'Horário'
+				}
+			}
+		}
 	}
 };
 
 export const load = (async () => {
 	const datasets = {
-		d1,
-		d2,
-		d3
+		metaDeFaturamento: doughnutConfig,
+		faturamentoPorMes: lineConfig,
+		produtosMaisVendidos: pieConfig,
+		vendasPorHorario: barConfig
 	};
 
 	return {
