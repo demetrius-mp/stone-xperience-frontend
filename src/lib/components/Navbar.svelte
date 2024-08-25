@@ -5,7 +5,6 @@
 	import { sidebarIsOpen } from '$lib/components/Sidebar.svelte';
 	import Dropdown from '$lib/components/UI/Dropdown.svelte';
 	import { slide } from 'svelte/transition';
-	import IconAccount from '~icons/mdi/Account';
 	import IconMenu from '~icons/mdi/Menu';
 </script>
 
@@ -18,14 +17,14 @@
 			<div class="flex items-center justify-start gap-1">
 				<button
 					on:click={() => ($sidebarIsOpen = !$sidebarIsOpen)}
-					class="btn btn-ghost btn-square sm:hidden btn-sm"
+					class="btn btn-ghost btn-square sm:hidden"
 				>
 					<span class="sr-only">Open sidebar</span>
-					<IconMenu class="h-6 w-6" />
+					<IconMenu class="h-6 w-6 text-white" />
 				</button>
 				<a
 					href="/"
-					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap btn-sm font-bold text-white"
+					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap font-bold text-white"
 				>
 					stoneXperience
 				</a>
@@ -46,8 +45,11 @@
 						}
 					}}
 				>
-					<button use:melt={trigger} class="btn btn-circle btn-ghost btn-sm">
-						<IconAccount class="text-lg" />
+					<button use:melt={trigger} class="btn btn-circle btn-ghost">
+						<!-- <IconAccount class="text-lg" /> -->
+						<div class="w-12 rounded-full">
+							<img alt="Profile" src="/profile.png" />
+						</div>
 					</button>
 
 					{#if open}

@@ -161,7 +161,7 @@
 </svelte:head>
 
 <div class="sm:ml-64">
-	<div class="mt-14">
+	<div class="mt-[4.5rem]">
 		<div class="flex justify-center sm:hidden bg-base-200 p-2">
 			<span class="text-2xl font-bold"> Chat inteligente </span>
 		</div>

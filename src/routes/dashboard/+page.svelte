@@ -13,7 +13,7 @@
 </svelte:head>
 
 <div class=" sm:ml-64">
-	<div class="mt-[3.5rem] p-4">
+	<div class="mt-[4.5rem] p-4">
 		<h2 class="text-3xl font-extrabold text-primary strong-green mb-4">Dashboard</h2>
 
 		<div class="flex flex-col gap-4 xl:grid xl:grid-cols-3">

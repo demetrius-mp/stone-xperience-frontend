@@ -55,7 +55,7 @@
 
 <aside
 	class={classnames(
-		'fixed top-0 left-0 z-40 w-64 h-screen pt-[4.25rem] transition-transform sm:translate-x-0 border-r bg-base-100 border-gray-300',
+		'fixed top-0 left-0 z-40 w-64 h-screen pt-[5.25rem] transition-transform sm:translate-x-0 border-r bg-base-100 border-gray-300',
 		$sidebarIsOpen && 'transform-none',
 		!$sidebarIsOpen && '-translate-x-full'
 	)}
