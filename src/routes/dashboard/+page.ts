@@ -37,7 +37,7 @@ const textCenter: Plugin = {
 
 		const text = ((faturamentoAtual / meta) * 100).toFixed(1) + '%',
 			textX = Math.round((width - ctx.measureText(text).width) / 2),
-			textY = height / 2;
+			textY = (11 * height) / 20;
 
 		ctx.fillText(text, textX, textY);
 		ctx.save();
@@ -53,16 +53,21 @@ const doughnutConfig: ChartConfiguration = {
 		datasets: [
 			{
 				data: [faturamentoAtual, restante],
-				backgroundColor: [colors[5], colors[0]]
+				backgroundColor: [colors[5], colors[0]],
+				borderWidth: 0
 			}
 		]
 	},
 	options: {
-		// cutout: '75%',
+		// @ts-expect-error - This is a custom label
+		cutout: '75%',
 		plugins: {
 			title: {
 				display: true,
-				text: `Meta de Faturamento Anual: ${meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+				text: `Meta de Faturamento Anual: ${meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`,
+				font: {
+					size: 20
+				}
 			},
 			legend: {
 				display: false
@@ -116,7 +121,10 @@ const lineConfig: ChartConfiguration = {
 		plugins: {
 			title: {
 				display: true,
-				text: 'Faturamento por Mês'
+				text: 'Faturamento por Mês',
+				font: {
+					size: 20
+				}
 			},
 			legend: {
 				display: false
@@ -166,7 +174,8 @@ const pieConfig: ChartConfiguration = {
 					colors[5],
 					colors[6]
 				],
-				hoverOffset: 4
+				hoverOffset: 4,
+				borderWidth: 1
 			}
 		]
 	},
@@ -174,7 +183,10 @@ const pieConfig: ChartConfiguration = {
 		plugins: {
 			title: {
 				display: true,
-				text: 'Produtos mais vendidos'
+				text: 'Produtos mais vendidos',
+				font: {
+					size: 20
+				}
 			},
 			legend: {
 				display: true
@@ -220,7 +232,10 @@ const barConfig: ChartConfiguration = {
 		plugins: {
 			title: {
 				display: true,
-				text: 'Vendas por horário'
+				text: 'Vendas por horário',
+				font: {
+					size: 20
+				}
 			},
 			legend: {
 				display: false

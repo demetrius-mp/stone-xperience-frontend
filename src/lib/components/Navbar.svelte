@@ -1,6 +1,5 @@
 <script lang="ts">
 	import IconAccountCog from '~icons/mdi/AccountCog';
-	import IconChartLine from '~icons/mdi/ChartLine';
 	import IconLogout from '~icons/mdi/Logout';
 
 	import { sidebarIsOpen } from '$lib/components/Sidebar.svelte';
@@ -11,8 +10,8 @@
 </script>
 
 <nav
-	class="fixed top-0 z-50 w-full border-b bg-base-100 border-gray-300"
-	style="padding-right: var(--scrollbar-width, 0px);"
+	class="fixed top-0 z-50 w-full border-b bg-primary border-gray-300"
+	style="padding-right: var(--scrollbar-width, 0px); background-color: #00a868;"
 >
 	<div class="px-3 py-3">
 		<div class="flex items-center justify-between">
@@ -26,9 +25,9 @@
 				</button>
 				<a
 					href="/"
-					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap btn-sm font-bold strong-green"
+					class="flex md:me-24 btn btn-ghost text-xl sm:text-2xl whitespace-nowrap btn-sm font-bold text-white"
 				>
-					stone Xperience
+					stoneXperience
 				</a>
 			</div>
 			<div class="ms-3">
@@ -56,18 +55,9 @@
 
 						<div
 							use:melt={menu}
-							class="z-[60] flex w-48 flex-col gap-1 rounded-box bg-base-300 p-2"
+							class="z-[60] flex w-48 flex-col gap-1 rounded-box bg-primary p-2"
 							transition:slide={{ duration: 100 }}
 						>
-							<a
-								href="/dashboard"
-								class="flex w-full items-center gap-2 rounded-lg p-2 data-[highlighted]:bg-base-content/5"
-								use:melt={item}
-							>
-								<IconChartLine />
-								Dashboard
-							</a>
-
 							<button
 								class="flex w-full items-center gap-2 rounded-lg p-2 data-[highlighted]:bg-base-content/5"
 								use:melt={item}
@@ -77,7 +67,7 @@
 							</button>
 
 							<button
-								class="flex w-full items-center gap-2 rounded-lg p-2 text-error data-[highlighted]:bg-base-content/5"
+								class="flex w-full items-center gap-2 rounded-lg p-2 data-[highlighted]:bg-base-content/5"
 								use:melt={item}
 							>
 								<IconLogout />

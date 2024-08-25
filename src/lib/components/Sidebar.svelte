@@ -26,19 +26,19 @@
 			href: '/dashboard'
 		},
 		{
-			name: 'Chat inteligente',
-			icon: IconChat,
-			href: '/chat'
-		},
-		{
 			name: 'Estoque',
 			icon: IconStore,
 			href: '/store'
 		},
 		{
-			name: 'Caixa',
+			name: 'Fluxo de caixa',
 			icon: IconCashRegister,
 			href: '/cash-register'
+		},
+		{
+			name: 'Pergunte ao Tony',
+			icon: IconChat,
+			href: '/chat'
 		}
 	];
 
@@ -82,6 +82,7 @@
 
 <style lang="postcss">
 	.active {
-		@apply !bg-primary/90;
+		@apply text-white;
+		background-color: #00a868 !important;
 	}
 </style>

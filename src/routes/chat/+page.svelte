@@ -83,18 +83,27 @@
 	async function sendSalesReport() {
 		addMessage({
 			from: 'user',
-			text: 'Relatório de vendas da última semana.'
+			text: 'Relatório de faturamento'
+		});
+
+		addMessage({
+			from: 'ai',
+			text: '#choose-sales-report-interval'
+		});
+	}
+
+	async function sendWeeklySalesReport() {
+		addMessage({
+			from: 'user',
+			text: 'Semanal'
+		});
+
+		addMessage({
+			from: 'ai',
+			text: 'Ok, estou preparando os dados do seu relatório de vendas.\nPor favor, aguarde um momento.'
 		});
 
 		const responses: Omit<Message, 'time'>[] = [
-			{
-				from: 'ai',
-				text: 'Ok, estou preparando os dados do seu relatório de vendas.\nPor favor, aguarde um momento.'
-			},
-			{
-				from: 'ai',
-				text: 'Certo, seu relatório está pronto!\n'
-			},
 			{
 				from: 'ai',
 				text: 'Relatório (05/08/2024 - 11/08/2024):\n\n- Total de vendas: R$ 1.500,00\n- Total de despesas: R$ 500,00\n- Lucro líquido: R$ 1.000,00'
@@ -110,6 +119,18 @@
 
 			addMessage(element);
 		}
+	}
+
+	async function handleRejectSendEmail() {
+		addMessage({
+			from: 'user',
+			text: 'Não, não desejo receber'
+		});
+
+		addMessage({
+			from: 'ai',
+			text: 'Ok, posso te ajudar com mais alguma coisa?'
+		});
 	}
 </script>
 
@@ -127,37 +148,56 @@
 			{#each messages as { from, time, text }, i (i)}
 				<div animate:flip transition:fade>
 					{#if from === 'ai'}
-						<ChatItem position="left" icon={IconRobotExcited} from="Stone AI" {time}>
+						<ChatItem position="left" icon={IconRobotExcited} from="Tony" {time}>
 							{#if text === '#greeting'}
 								<span> Olá! Como posso te ajudar hoje? </span>
 								<br />
-								<span>Escolha uma das opções abaixo.</span>
+								<span>Escolha uma das opções abaixo:</span>
 
-								<div class="mt-2 flex flex-col gap-1">
-									<button class="link text-start"> Resuma os dados do dashboard. </button>
-
-									<button on:click={sendSalesReport} class="link text-start">
-										Relatório de vendas da última semana.
+								<div class="mt-2 flex flex-col gap-2">
+									<button on:click={sendSalesReport} class="btn bg-white text-start">
+										Relatório de faturamento
 									</button>
 
-									<button class="link text-start"> Situação atual do estoque. </button>
+									<button class="btn bg-white text-start"> Estoque atual </button>
+
+									<button class="btn bg-white text-start"> Fluxo de caixa </button>
+								</div>
+							{:else if text === '#choose-sales-report-interval'}
+								<span>Certo! Escolha um dos períodos abaixo:</span>
+
+								<div class="mt-2 flex flex-col gap-1">
+									<button class="btn bg-white text-start"> Diário </button>
+									<button on:click={sendWeeklySalesReport} class="btn bg-white text-start">
+										Semanal
+									</button>
+									<button class="btn bg-white text-start"> Mensal </button>
+									<button class="btn bg-white text-start"> Anual </button>
 								</div>
 							{:else if text === '#show-options'}
-								<span>Escolha uma das opções abaixo.</span>
+								<span>Escolha uma das opções abaixo:</span>
 
-								<div class="mt-2 flex flex-col gap-1">
-									<button on:click={sendSalesReport} class="link text-start">
-										Relatório de vendas da última semana.
+								<div class="mt-2 flex flex-col gap-2">
+									<button on:click={sendSalesReport} class="btn bg-white text-start">
+										Relatório de faturamento
 									</button>
 
-									<button class="link text-start"> Situação atual do estoque. </button>
+									<button class="btn bg-white text-start"> Estoque atual </button>
+
+									<button class="btn bg-white text-start"> Fluxo de caixa </button>
 								</div>
 							{:else if text === '#send-email'}
-								<span> Deseja receber o relatório por email? </span>
+								<span> Deseja receber o relatório? </span>
 
 								<div class="mt-2 flex flex-col gap-1">
-									<button on:click={handleSendEmail} class="link text-start">
-										Sim, envie no meu email.
+									<button on:click={handleSendEmail} class="btn bg-white text-start">
+										E-mail
+									</button>
+
+									<button class="btn bg-white text-start"> WhatsApp </button>
+
+									<button on:click={handleRejectSendEmail} class="btn bg-white text-start">
+										Não, não desejo receber
 									</button>
 								</div>
 							{:else}
