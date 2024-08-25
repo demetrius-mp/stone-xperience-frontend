@@ -4,8 +4,8 @@
 	import { flip } from 'svelte/animate';
 	import type { EventHandler } from 'svelte/elements';
 	import { fade } from 'svelte/transition';
+	import IconTonyRobot from '~icons/custom-icons/tony-robot';
 	import IconAccount from '~icons/mdi/Account';
-	import IconRobotExcited from '~icons/mdi/RobotExcited';
 	import IconSend from '~icons/mdi/Send';
 	import ChatItem from './ChatItem.svelte';
 
@@ -162,15 +162,12 @@
 
 <div class="sm:ml-64">
 	<div class="mt-[4.5rem]">
-		<div class="flex justify-center sm:hidden bg-base-200 p-2">
-			<span class="text-2xl font-bold"> Chat inteligente </span>
-		</div>
-
 		<div class="flex flex-col gap-4 p-4" use:scrollToBottom={{ list: messages }}>
 			{#each messages as { from, time, text }, i (i)}
 				<div animate:flip transition:fade>
 					{#if from === 'ai'}
-						<ChatItem position="left" icon={IconRobotExcited} from="Tony" {time}>
+						<!-- <ChatItem position="left" icon={IconRobotExcited} from="Tony" {time}> -->
+						<ChatItem position="left" icon={IconTonyRobot} from="Tony" {time}>
 							{#if text === '#greeting'}
 								<span> Olá! Como posso te ajudar hoje? </span>
 								<br />

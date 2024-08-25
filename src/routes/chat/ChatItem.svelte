@@ -13,7 +13,11 @@
 <div class="chat {positionClass} py-0">
 	<div class="chat-image avatar">
 		<div class="rounded-full">
-			<svelte:component this={icon} class="text-2xl" />
+			{#if from === 'Tony'}
+				<svelte:component this={icon} class="text-4xl -m-2" />
+			{:else}
+				<svelte:component this={icon} class="text-2xl" />
+			{/if}
 		</div>
 	</div>
 	<div class="chat-header mb-1 {marginClass}">
