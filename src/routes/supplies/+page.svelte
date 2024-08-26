@@ -43,7 +43,7 @@
 				<table class="table table-zebra">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th>ID</th>
 							<th>Item</th>
 							<th>Quantidade</th>
 							<th>Valor de compra</th>

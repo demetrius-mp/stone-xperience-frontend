@@ -45,7 +45,7 @@
 				<table class="table table-zebra">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th>ID</th>
 							<th>Nome</th>
 							<th>Qtd. compras</th>
 							<th>Valor total gasto</th>
