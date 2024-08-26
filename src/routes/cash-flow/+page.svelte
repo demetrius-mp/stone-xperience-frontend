@@ -1,5 +1,6 @@
 <script lang="ts">
 	import IconCalendar from '~icons/mdi/Calendar';
+	import IconSquareEditOutline from '~icons/mdi/SquareEditOutline';
 	export let data;
 
 	function formatCurrency(value: number) {
@@ -48,6 +49,7 @@
 							<th>Nome</th>
 							<th>Data de pagamento</th>
 							<th>Valor</th>
+							<th>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -69,6 +71,12 @@
 								<td>
 									<!-- {formatCurrency(item.value)} -->
 									{formatCurrency(2500)}
+								</td>
+
+								<td>
+									<button class="btn btn-xs btn-ghost">
+										<IconSquareEditOutline />
+									</button>
 								</td>
 							</tr>
 						{/each}
@@ -94,6 +102,7 @@
 							<th>Nome</th>
 							<th>Data de pagamento</th>
 							<th>Valor</th>
+							<th>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -115,6 +124,12 @@
 								<td>
 									<!-- {formatCurrency(item.value)} -->
 									{formatCurrency(2500)}
+								</td>
+
+								<td>
+									<button class="btn btn-xs btn-ghost">
+										<IconSquareEditOutline />
+									</button>
 								</td>
 							</tr>
 						{/each}

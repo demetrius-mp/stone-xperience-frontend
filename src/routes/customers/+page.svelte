@@ -1,5 +1,6 @@
 <script lang="ts">
 	import IconCalendar from '~icons/mdi/Calendar';
+	import IconSquareEditOutline from '~icons/mdi/SquareEditOutline';
 
 	export let data;
 
@@ -49,6 +50,7 @@
 							<th>Nome</th>
 							<th>Qtd. compras</th>
 							<th>Valor total gasto</th>
+							<th>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -68,6 +70,12 @@
 
 								<td>
 									{formatCurrency(customer.totalSpent)}
+								</td>
+
+								<td>
+									<button class="btn btn-xs btn-ghost">
+										<IconSquareEditOutline />
+									</button>
 								</td>
 							</tr>
 						{/each}
