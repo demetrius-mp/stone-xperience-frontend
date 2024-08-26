@@ -33,6 +33,30 @@ export const load = (async () => {
 			purchasePrice: 4,
 			salePrice: 7,
 			invoicing: 1050
+		},
+		{
+			id: 5,
+			name: 'Leite condensado',
+			quantity: 123,
+			purchasePrice: 4.27,
+			salePrice: 7.9,
+			invoicing: 1050
+		},
+		{
+			id: 6,
+			name: 'Creme de leite',
+			quantity: 154,
+			purchasePrice: 3.87,
+			salePrice: 9.86,
+			invoicing: 1050
+		},
+		{
+			id: 7,
+			name: 'Suco',
+			quantity: 146,
+			purchasePrice: 7.86,
+			salePrice: 12.5,
+			invoicing: 1050
 		}
 	];
 

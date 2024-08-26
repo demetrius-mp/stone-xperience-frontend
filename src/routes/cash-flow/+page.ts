@@ -34,7 +34,13 @@ export const load = (async () => {
 
 	const employees = [
 		createEmployee('Atendente', 'Maria Clara Garcia Alves'),
-		createEmployee('Caixa', 'Sérgio Rodrigues Freitas')
+		createEmployee('Caixa', 'Sérgio Rodrigues Freitas'),
+		createEmployee('Gerente', 'João Pedro da Silva'),
+		createEmployee('Cozinheiro', 'Ana Maria de Souza'),
+		createEmployee('Auxiliar de Cozinha', 'José Carlos de Oliveira'),
+		createEmployee('Auxiliar de Limpeza', 'Maria José da Silva'),
+		createEmployee('Segurança', 'José Carlos de Oliveira'),
+		createEmployee('Auxiliar de Segurança', 'Maria José da Silva')
 	];
 
 	return {
