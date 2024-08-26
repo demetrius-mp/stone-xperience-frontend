@@ -68,15 +68,15 @@
 			text: userMessage
 		});
 
-		userMessage = '';
-
-		const lastMessage = messages.at(-1);
+		const lastMessage = messages.at(-2);
 
 		const isEndingConversation =
-			['não', 'nao'].includes(userMessage) &&
+			['não', 'nao', 'Não'].includes(userMessage) &&
 			lastMessage &&
 			lastMessage.from === 'ai' &&
 			lastMessage.text === 'Ok, posso te ajudar com mais alguma coisa?';
+
+		userMessage = '';
 
 		if (isEndingConversation) {
 			addMessage({
